@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form id = 'query-form'>
+      <input type = 'text' id = 'search-query'></input>
+      <input type = 'submit'></input>
+    </form>
+    <div id = 'destinations'>
+    </div>
+    <div id = 'parking-spots'>
+    </div>
+    <script src = "bin/jquery-3.1.0.min.js"></script>
+    <script src = "bin/handlebars-v4.0.5.js"></script>
+    <script src = "app.js"></script>
+    <script src = "store.js"></script>
+    <script src = "models/destination.js"></script>
+    <script src = "controllers/destinationsController.js"></script>
+    <script src = "models/parkingSpot.js"></script>
+    <script src = "controllers/parkingSpotsController.js"></script>
+    <script id="destinations-template" type="text/x-handlebars-template">
+      {{#each this}}
+      <br>{{name}}
+      <br>{{vicinity}}
+      <br>{{price}}
+      <br>{{rating}}
+      <br>{{lat}}
+      <br>{{lng}}
+      <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id = {{id}}>link to parking</a>
+      {{/each}}
+    </script>
+    <script id="parking-spots-template" type="text/x-handlebars-template">
+      {{#each this}}
+      <br>{{name}}
+      <br>{{vicinity}}
+      {{/each}}
+    </script>
+  </body>
+</html>
