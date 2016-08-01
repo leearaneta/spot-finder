@@ -12,10 +12,11 @@ function destinationsAdapter(query) {
     var object = xmlToJson(turtle)
     var objects = object.PlaceSearchResponse.result
     var destinations = objects.map((object) => {
+      // debugger
       var name = object.name["#text"]
       var vicinity = object.formatted_address["#text"]
-      var price = object.price_level["#text"]
-      var rating = object.rating["#text"]
+      var price = object.price_level ? object.price_level["#text"] : ""
+      var rating = object.rating ? object.rating["text"] : ""
       var placeID = object.place_id["#text"]
       var lat = object.geometry.location.lat["#text"]
       var lng = object.geometry.location.lng["#text"]

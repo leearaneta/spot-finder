@@ -34,10 +34,10 @@
     </script>
     <script id="destinations-template" type="text/x-handlebars-template">
       {{#each this}}
-      <br>{{name}}
+      <br>{{currentID}} {{name}}
       <br>{{vicinity}}
-      <br>{{price}}
-      <br>{{rating}}
+      <br>price rating: {{price}}
+      <br>rating: {{rating}}
       <br><a href = "#" onclick = "showDetails(this)" data-destination-id = {{id}}>Show Details</a>
       {{/each}}
     </script>
@@ -48,7 +48,7 @@
     </script>
     <script id="parking-spots-template" type="text/x-handlebars-template">
       {{#each this}}
-      <br>{{name}}
+      <br>{{currentID}} {{name}}
       <br>{{vicinity}}
       {{/each}}
     </script>
