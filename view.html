@@ -44,6 +44,8 @@
     <script src = "models/parkingSpot.js"></script>
     <script src = "controllers/parkingSpotsController.js"></script>
     <script src = "controllers/mapsController.js"></script>
+    <script src = "models/directions.js"></script>
+    <script src = "controllers/directionsController.js"></script>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-ExUEzUVT9QOWcLBWJLbQ1ufnMC7g_PQ">
     </script>
@@ -67,7 +69,7 @@
       {{#if allowParkingLink}}
       <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id-apples = {{id}}>Find Parking</a>
       {{else}}
-      <br><a href = "#" onclick = "getDirections(this)" data-parking-spot= "{{placeID}}" data-destination = "{{destination.placeID}}">Get Walking Directions</a>
+      <br><a href = "#" onclick = "addDirections(this)" data-parking-spot= "{{placeID}}" data-destination = "{{destination.placeID}}">Get Walking Directions</a>
       {{/if}}
     </script>
     <script id="directions-header-template" type="text/x-handlebars-template">
