@@ -17,7 +17,6 @@ function destinationsAdapter(query) {
       if (results.length === undefined) {
         results = [results]
       }
-      console.log(results);
       // Convert the results into a list of destination objects
       var destinations = results.map((object) => {
         var name = object.name ? object.name["#text"] : ""
@@ -29,8 +28,6 @@ function destinationsAdapter(query) {
         var lng = object.geometry.location.lng["#text"]
         return new Destination(name, vicinity, price, rating, placeID, lat, lng)
       })
-      console.log(destinations)
-      console.log(typeof destinations)
 
       // Convert destinations to an array
       // sorting code
@@ -53,8 +50,6 @@ function destinationsAdapter(query) {
         }
       })
 
-      console.log(sortedByPrice);
-      console.log(sortedByRating);
       // Handlebars template code
       var src = $("#destinations-template").html()
       var template = Handlebars.compile(src)

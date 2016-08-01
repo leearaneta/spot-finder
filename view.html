@@ -3,52 +3,34 @@
 
   <head>
     <meta charset="utf-8">
-    <title></title>
-      <link rel="stylesheet" href="bin/bootstrap.css">
-      <link rel="stylesheet" href="customStyleSheet.css">
+    <title>Spot Finder</title>
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <!-- <link rel="stylesheet" href="customStyleSheet.css"> -->
     <style type="text/css">
       html, body { height: 100%; margin: 0; padding: 0; }
       #map { height: 42%; }
     </style>
   </head>
-
-
   <body>
+    <!-- The Search Form -->
     <form id = 'query-form'>
       <input type = 'text' id = 'search-query'></input>
       <input type = 'submit'></input>
     </form>
 
-    <!-- <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="customDiv">
-
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="customDiv">
-
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="customDiv">
-
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-
+    <!-- Google Map -->
     <div id="map"></div>
-    <div id = 'destinations'>
-    </div>
-    <div id = 'details'>
-    </div>
-    <div id = 'parking-spots'>
-    </div>
-    <script src = "bin/jquery-3.1.0.min.js"></script>
-    <script src = "bin/handlebars-v4.0.5.js"></script>
+
+    <!-- Search results -->
+    <div id = 'destinations'></div>
+    <div id = 'details'></div>
+    <div id = 'parking-spots'></div>
+
+    <!-- Import JS files -->
+    <script src = "lib/jquery-3.1.0.min.js"></script>
+    <script src = "lib/handlebars-v4.0.5.js"></script>
+    <script src = "lib/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src = "app.js"></script>
     <script src = "store.js"></script>
     <script src = "models/destination.js"></script>
@@ -56,10 +38,11 @@
     <script src = "models/parkingSpot.js"></script>
     <script src = "controllers/parkingSpotsController.js"></script>
     <script src = "controllers/mapsController.js"></script>
-    <script src = "bin/bootstrap.js"></script>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE">
     </script>
+
+    <!-- Handlebar Templates -->
     <script id="destinations-template" type="text/x-handlebars-template">
       {{#each this}}
     <div class="col-md-4">
