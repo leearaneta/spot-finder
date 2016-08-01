@@ -12,24 +12,29 @@
     </style>
   </head>
   <body>
-    <h1>SPOT FINDER</h1>
-    <!-- The Search Form -->
-    <form id = 'query-form'>
-      <input type = 'text' id = 'search-query'><br>
-      <label for='rate-sort'>Sort by ranking:</label>
-      <input type='checkbox' id='rank-sort'>
-      <label for='price-sort'>Sort by price:</label>
-      <input type='checkbox' id='price-sort'><br>
-      <input type = 'submit'>
-    </form>
+    <!-- <container> -->
+      <!-- <div class="row"> -->
+      <div class="col-sm-4">
+        <h1>SPOT FINDER</h1>
+        <!-- The Search Form -->
+        <form id = 'query-form'>
+          <input type = 'text' id = 'search-query'><br>
+          <label for='rate-sort'>Sort by ranking:</label>
+          <input type='checkbox' id='rank-sort'>
+          <label for='price-sort'>Sort by price:</label>
+          <input type='checkbox' id='price-sort'><br>
+          <input type = 'submit'>
+        </form>
+      </div>
 
-    <!-- Google Map -->
-    <div id="map"></div>
+      <!-- Google Map -->
+      <div id="map" ></div>
 
-    <!-- Search results -->
-    <div id = 'details'></div>
-    <div id = 'parking-spots'></div>
-    <div id = 'destinations'></div>
+      <!-- Search results -->
+      <div id = 'details'></div>
+      <div id = 'parking-spots'></div>
+      <div id = 'destinations'></div>
+    <!-- </container> -->
 
     <!-- Import JS files -->
     <script src = "lib/jquery-3.1.0.min.js"></script>
