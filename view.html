@@ -27,8 +27,10 @@
     <div id="map"></div>
 
     <!-- Search results -->
+    <div id = 'details-header'></div>
     <div id = 'details'></div>
-    <div id = 'parking-spots'></div>
+    <div id = 'directions-header'></div>
+    <div id = 'directions'></div>
     <div id = 'destinations'></div>
 
     <!-- Import JS files -->
@@ -64,7 +66,17 @@
       <br>{{phoneNumber}}
       {{#if allowParkingLink}}
       <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id-apples = {{id}}>Find Parking</a>
+      {{else}}
+      <br><a href = "#" onclick = "getDirections(this)" data-parking-spot= "{{placeID}}" data-destination = "{{destination.placeID}}">Get Walking Directions</a>
       {{/if}}
+    </script>
+    <script id="directions-header-template" type="text/x-handlebars-template">
+      <h4>Directions from {{startAddress}} to {{endAddress}} ({{distance}} -- {{duration}})</h4>
+    </script>
+    <script id="directions-template" type="text/x-handlebars-template">
+      {{#each this}}
+      <br> {{{html_instructions}}} for {{{distance.text}}} ({{{duration.text}}})
+      {{/each}}
     </script>
   </body>
 </html>
