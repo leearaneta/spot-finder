@@ -52,6 +52,7 @@ function xmlToJson(xml) {
 	return obj;
 };
 
+
 $(document).ready(() => {
   queryListener()
 })
