@@ -1,18 +1,45 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="utf-8">
     <title></title>
+      <link rel="stylesheet" href="bin/bootstrap.css">
+      <link rel="stylesheet" href="customStyleSheet.css">
     <style type="text/css">
       html, body { height: 100%; margin: 0; padding: 0; }
       #map { height: 42%; }
     </style>
   </head>
+
+
   <body>
     <form id = 'query-form'>
       <input type = 'text' id = 'search-query'></input>
       <input type = 'submit'></input>
     </form>
+
+    <!-- <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="customDiv">
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="customDiv">
+
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="customDiv">
+
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+
     <div id="map"></div>
     <div id = 'destinations'>
     </div>
@@ -29,16 +56,19 @@
     <script src = "models/parkingSpot.js"></script>
     <script src = "controllers/parkingSpotsController.js"></script>
     <script src = "controllers/mapsController.js"></script>
+    <script src = "bin/bootstrap.js"></script>
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE">
     </script>
     <script id="destinations-template" type="text/x-handlebars-template">
       {{#each this}}
-      <br>{{currentID}} {{name}}
-      <br>{{vicinity}}
-      <br>price rating: {{price}}
-      <br>rating: {{rating}}
-      <br><a href = "#" onclick = "findDestination(this)" data-destination-id = {{id}}>Show Details</a>
+    <div class="col-md-4">
+       <br>{{currentID}} {{name}}
+       <br>{{vicinity}}
+       <br>price rating: {{price}}
+       <br>rating: {{rating}}
+       <br><a href = "#" onclick = "findDestination(this)" data-destination-id = {{id}}>Show Details</a>
+    </div>
       {{/each}}
     </script>
     <script id="details-template" type="text/x-handlebars-template">
