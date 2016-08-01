@@ -10,19 +10,50 @@ function destinationsAdapter(query) {
     url: url
   }).done((turtle) => {
     var object = xmlToJson(turtle)
-    var destinations = object.PlaceSearchResponse.result
-    var hi = destinations.map((destination) => {
-      var name = destination.name["#text"]
-      var vicinity = destination.formatted_address["#text"]
-      var price = destination.price_level["#text"]
-      var rating = destination.rating["#text"]
-      var lat = destination.geometry.location.lat["#text"]
-      var lng = destination.geometry.location.lng["#text"]
-      return new Destination(name, vicinity, price, rating, lat, lng)
+    var objects = object.PlaceSearchResponse.result
+    if (objects === undefined) {
+      alert("it's 1995")
+    } else if (objects.length === undefined) {
+      objects = [objects]
+    }
+    var destinations = objects.map((object) => {
+      var name = object.name ? object.name["#text"] : ""
+      var vicinity = object.formatted_address ? object.formatted_address["#text"] : ""
+      var price = object.price_level ? object.price_level["#text"] : ""
+      var rating = object.rating ? object.rating["text"] : ""
+      var placeID = object.place_id["#text"]
+      var lat = object.geometry.location.lat["#text"]
+      var lng = object.geometry.location.lng["#text"]
+      return new Destination(name, vicinity, price, rating, placeID, lat, lng)
     })
+    debugger
+    var sortedByPrice = destinations.sort((a, b) => a.price - b.price)
+    var sortedByRating = destinations.sort((a, b) => a.rating - b.rating)
     var src = $("#destinations-template").html()
     var template = Handlebars.compile(src)
-    var newHTML = template(hi)
-    $("#destinations").append(newHTML)
+    var newHTML = template(destinations)
+    $("#destinations").empty().append(newHTML)
+    createDestinationsMap(destinations)
+  })
+}
+
+function showDetails(element) {
+  var destinationID = $(element).data("destination-id")
+  var destination = store.destinations.find((destination) => destination.id === destinationID)
+  store.currentDestination = destination
+  // this way is really unorthodox
+  var url = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${destination.placeID}&key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE`
+  $.ajax({
+    method: 'GET',
+    url: url
+  }).done((response) => {
+    var apple = response.result
+    var destination = store.currentDestination
+    destination.phoneNumber = apple.formatted_phone_number
+    destination.website = apple.website
+    var src = $("#details-template").html()
+    var template = Handlebars.compile(src)
+    var newHTML = template(destination)
+    $("#details").empty().append(newHTML)
   })
 }
