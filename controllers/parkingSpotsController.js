@@ -19,10 +19,6 @@ function parkingSpotsAdapter(destination) {
       var placeID = object.place_id
       return new ParkingSpot(name, vicinity, lat, lng, placeID, destination)
     })
-    // var src = $('#parking-spots-template').html()
-    // var template = Handlebars.compile(src)
-    // var newHTML = template(parkingSpots)
-    // $("#parking-spots").empty().append(newHTML)
     createParkingSpotsMap(destination, parkingSpots)
   })
 }
