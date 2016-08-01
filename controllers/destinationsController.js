@@ -4,7 +4,7 @@ function createDestinations() {
 }
 
 function destinationsAdapter(query) {
-  var url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=" + query + "&key=AIzaSyDEsYgk8H0XMACDf4Wk4SxW4P05UQkZmXY"
+  var url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=" + query + "&key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE"
   $.ajax({
     method: "GET",
     url: url
@@ -22,7 +22,7 @@ function destinationsAdapter(query) {
         var name = object.name ? object.name["#text"] : ""
         var vicinity = object.formatted_address ? object.formatted_address["#text"] : ""
         var price = object.price_level ? object.price_level["#text"] : ""
-        var rating = object.rating ? object.rating["text"] : ""
+        var rating = object.rating ? object.rating["#text"] : ""
         var placeID = object.place_id["#text"]
         var lat = object.geometry.location.lat["#text"]
         var lng = object.geometry.location.lng["#text"]

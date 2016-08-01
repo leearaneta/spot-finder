@@ -5,7 +5,7 @@ function addParkingSpots(element) {
 }
 
 function parkingSpotsAdapter(destination) {
-  var url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${destination.lat},${destination.lng}&radius=500&type=parking&key=AIzaSyA4X16Aq4qYw7WrqcvZGzdKgeeL26E5irc`
+  var url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${destination.lat},${destination.lng}&radius=500&type=parking&key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE`
   $.ajax({
     method: 'GET',
     url: url
@@ -16,12 +16,13 @@ function parkingSpotsAdapter(destination) {
       var vicinity = object.vicinity
       var lat = object.geometry.location.lat
       var lng = object.geometry.location.lng
-      return new ParkingSpot(name, vicinity, lat, lng, destination)
+      var placeID = object.place_id
+      return new ParkingSpot(name, vicinity, lat, lng, placeID, destination)
     })
-    var src = $('#parking-spots-template').html()
-    var template = Handlebars.compile(src)
-    var newHTML = template(parkingSpots)
-    $("#parking-spots").empty().append(newHTML)
+    // var src = $('#parking-spots-template').html()
+    // var template = Handlebars.compile(src)
+    // var newHTML = template(parkingSpots)
+    // $("#parking-spots").empty().append(newHTML)
     createParkingSpotsMap(destination, parkingSpots)
   })
 }
