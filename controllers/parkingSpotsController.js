@@ -33,18 +33,13 @@ function getDirections(element) {
   }).done((response) => {
     var results = response.routes[0].legs[0]
     var steps = results.steps
-    var src = $("#directions-template").html()
-    var template = Handlebars.compile(src)
-    var newHTML = template(steps)
-    $("#directions").empty().append(newHTML)
-    var headerSRC = $("#directions-header-template").html()
-    var headerTemplate = Handlebars.compile(headerSRC)
-    var headerNewHTML = headerTemplate({
+    render('directions', steps)
+    var header = {
       startAddress: results.start_address,
       endAddress: results.end_address,
       distance: results.distance.text,
       duration: results.duration.text
-    })
-    $("#directions-header").empty().append(headerNewHTML)
+    }
+    render('directions-header', header)
   })
 }
