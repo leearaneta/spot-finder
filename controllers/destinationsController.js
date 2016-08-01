@@ -16,13 +16,37 @@ function destinationsAdapter(query) {
       var vicinity = destination.formatted_address["#text"]
       var price = destination.price_level["#text"]
       var rating = destination.rating["#text"]
+      var placeID = destination.place_id["#text"]
       var lat = destination.geometry.location.lat["#text"]
       var lng = destination.geometry.location.lng["#text"]
-      return new Destination(name, vicinity, price, rating, lat, lng)
+      return new Destination(name, vicinity, price, rating, placeID, lat, lng)
     })
+    var sortedByPrice = hi.sort((a, b) => a.price - b.price)
+    var sortedByRating = hi.sort((a, b) => a.rating - b.rating)
     var src = $("#destinations-template").html()
     var template = Handlebars.compile(src)
     var newHTML = template(hi)
-    $("#destinations").append(newHTML)
+    $("#destinations").empty().append(newHTML)
+  })
+}
+
+function showDetails(element) {
+  var destinationID = $(element).data("destination-id")
+  var destination = store.destinations.find((destination) => destination.id === destinationID)
+  store.currentDestination = destination
+  // this way is really unorthodox
+  var url = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${destination.placeID}&key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE`
+  $.ajax({
+    method: 'GET',
+    url: url
+  }).done((response) => {
+    var apple = response.result
+    var destination = store.currentDestination
+    destination.phoneNumber = apple.formatted_phone_number
+    destination.website = apple.website
+    var src = $("#details-template").html()
+    var template = Handlebars.compile(src)
+    var newHTML = template(destination)
+    $("#details").empty().append(newHTML)
   })
 }

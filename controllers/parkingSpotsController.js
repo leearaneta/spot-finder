@@ -1,5 +1,5 @@
 function addParkingSpots(element) {
-  var destinationID = $(element).data("destination-id")
+  var destinationID = $(element).data("destination-id-apples")
   var destination = store.destinations.find((destination) => destination.id === destinationID)
   parkingSpotsAdapter(destination)
 }
@@ -21,6 +21,6 @@ function parkingSpotsAdapter(destination) {
     var src = $('#parking-spots-template').html()
     var template = Handlebars.compile(src)
     var newHTML = template(hi)
-    $("#parking-spots").append(newHTML)
+    $("#parking-spots").empty().append(newHTML)
   })
 }

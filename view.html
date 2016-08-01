@@ -3,13 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 100%; }
+    </style>
   </head>
   <body>
     <form id = 'query-form'>
       <input type = 'text' id = 'search-query'></input>
       <input type = 'submit'></input>
     </form>
+    <div id="map"></div>
     <div id = 'destinations'>
+    </div>
+    <div id = 'details'>
     </div>
     <div id = 'parking-spots'>
     </div>
@@ -21,16 +28,22 @@
     <script src = "controllers/destinationsController.js"></script>
     <script src = "models/parkingSpot.js"></script>
     <script src = "controllers/parkingSpotsController.js"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE&callback=initMap">
+    </script>
     <script id="destinations-template" type="text/x-handlebars-template">
       {{#each this}}
       <br>{{name}}
       <br>{{vicinity}}
       <br>{{price}}
       <br>{{rating}}
-      <br>{{lat}}
-      <br>{{lng}}
-      <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id = {{id}}>link to parking</a>
+      <br><a href = "#" onclick = "showDetails(this)" data-destination-id = {{id}}>Show Details</a>
       {{/each}}
+    </script>
+    <script id="details-template" type="text/x-handlebars-template">
+      <br>{{phoneNumber}}
+      <br>{{website}}
+      <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id-apples = {{id}}>Find Parking</a>
     </script>
     <script id="parking-spots-template" type="text/x-handlebars-template">
       {{#each this}}
