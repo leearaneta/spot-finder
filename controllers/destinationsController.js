@@ -1,9 +1,14 @@
 function createDestinations() {
   var query = $("#search-query").val()
-  destinationsAdapter(query)
+  sortByRating = $('rate-sort').is(':checked')
+  sortByPrice = $('price-sort').is(':checked')
+  $('#details').empty();
+  $('#directions-header').empty();
+  $('#directions').empty();
+  destinationsAdapter(query, sortByRating, sortByPrice)
 }
 
-function destinationsAdapter(query) {
+function destinationsAdapter(query, sortByRating, sortByPrice) {
   var url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=" + query + "&key=AIzaSyD-ExUEzUVT9QOWcLBWJLbQ1ufnMC7g_PQ"
   $.ajax({
     method: "GET",
@@ -29,26 +34,30 @@ function destinationsAdapter(query) {
         return new Destination(name, vicinity, price, rating, placeID, lat, lng)
       })
 
-      // Convert destinations to an array
-      // sorting code
-      var sortedByPrice = Array.from(destinations).sort((a, b) => {
-        if (a.price > b.price) {
-          return 1
-        } else if (a.price < b.price) {
-          return -1
-        } else {
-          return 0
-        }
-      })
-      var sortedByRating = Array.from(destinations).sort((a, b) => {
-        if (a.rating > b.rating) {
-          return 1
-        } else if (a.rating < b.rating) {
-          return -1
-        } else {
-          return 0
-        }
-      })
+      // Sorting by rating
+      if (sortByRating) {
+        destinations = Array.from(destinations).sort((a, b) => {
+          if (a.rating > b.rating) {
+            return -1
+          } else if (a.rating < b.rating) {
+            return 1
+          } else {
+            return 0
+          }
+        })
+      }
+      // Sorting by price
+      if (sortByPrice) {
+        destinations = Array.from(destinations).sort((a, b) => {
+          if (a.price > b.price) {
+            return 1
+          } else if (a.price < b.price) {
+            return -1
+          } else {
+            return 0
+          }
+        })
+      }
 
       // Handlebars template code
       var src = $("#destinations-template").html()
@@ -79,10 +88,10 @@ function showDetails(destination) {
     url: url
   }).done((response) => {
     console.log(response);
-    var apple = response.result
+    var result = response.result
     var destination = store.currentDestination
-    destination.phoneNumber = apple.formatted_phone_number
-    destination.website = apple.website
+    destination.phoneNumber = result.formatted_phone_number
+    destination.website = result.website
     var src = $("#details-template").html()
     var template = Handlebars.compile(src)
     var newHTML = template(destination)
