@@ -3,6 +3,8 @@ function createDestinations() {
   sortByRating = $('rate-sort').is(':checked')
   sortByPrice = $('price-sort').is(':checked')
   $('#details').empty();
+  $('#directions-header').empty();
+  $('#directions').empty();
   destinationsAdapter(query, sortByRating, sortByPrice)
 }
 
