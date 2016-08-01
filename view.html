@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="utf-8">
     <title>Spot Finder</title>
@@ -8,15 +7,20 @@
     <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
     <!-- <link rel="stylesheet" href="customStyleSheet.css"> -->
     <style type="text/css">
-      html, body { height: 100%; margin: 0; padding: 0; }
+      html, body { height: 100%; margin: 1%; padding: 1%; }
       #map { height: 42%; }
     </style>
   </head>
   <body>
+    <h1>SPOT FINDER</h1>
     <!-- The Search Form -->
     <form id = 'query-form'>
-      <input type = 'text' id = 'search-query'></input>
-      <input type = 'submit'></input>
+      <input type = 'text' id = 'search-query'><br>
+      <label for='rank-sort'>Sort by ranking:</label>
+      <input type='checkbox' id='rank-sort'>
+      <label for='price-sort'>Sort by price:</label>
+      <input type='checkbox' id='price-sort'><br>
+      <input type = 'submit'>
     </form>
 
     <!-- Google Map -->
@@ -39,7 +43,7 @@
     <script src = "controllers/parkingSpotsController.js"></script>
     <script src = "controllers/mapsController.js"></script>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-ExUEzUVT9QOWcLBWJLbQ1ufnMC7g_PQ">
     </script>
 
     <!-- Handlebar Templates -->
