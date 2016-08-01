@@ -4,7 +4,7 @@ function createDestinations() {
 }
 
 function destinationsAdapter(query) {
-  var url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=" + query + "&key=AIzaSyDEsYgk8H0XMACDf4Wk4SxW4P05UQkZmXY"
+  var url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=" + query + "&key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE"
   $.ajax({
     method: "GET",
     url: url
