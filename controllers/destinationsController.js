@@ -17,7 +17,6 @@ function destinationsAdapter(query) {
       if (results.length === undefined) {
         results = [results]
       }
-      console.log(results);
       // Convert the results into a list of destination objects
       var destinations = results.map((object) => {
         var name = object.name ? object.name["#text"] : ""
@@ -29,11 +28,8 @@ function destinationsAdapter(query) {
         var lng = object.geometry.location.lng["#text"]
         return new Destination(name, vicinity, price, rating, placeID, lat, lng)
       })
-      console.log(destinations)
-      console.log(typeof destinations)
 
-      // Convert destinations to an array
-      // sorting code
+      // Sorting by price
       var sortedByPrice = Array.from(destinations).sort((a, b) => {
         if (a.price > b.price) {
           return 1
@@ -43,6 +39,7 @@ function destinationsAdapter(query) {
           return 0
         }
       })
+      // Sorting by rating
       var sortedByRating = Array.from(destinations).sort((a, b) => {
         if (a.rating > b.rating) {
           return -1
@@ -53,8 +50,6 @@ function destinationsAdapter(query) {
         }
       })
 
-      console.log(sortedByPrice);
-      console.log(sortedByRating);
       // Handlebars template code
       var src = $("#destinations-template").html()
       var template = Handlebars.compile(src)
@@ -84,10 +79,10 @@ function showDetails(destination) {
     url: url
   }).done((response) => {
     console.log(response);
-    var apple = response.result
+    var result = response.result
     var destination = store.currentDestination
-    destination.phoneNumber = apple.formatted_phone_number
-    destination.website = apple.website
+    destination.phoneNumber = result.formatted_phone_number
+    destination.website = result.website
     var src = $("#details-template").html()
     var template = Handlebars.compile(src)
     var newHTML = template(destination)
