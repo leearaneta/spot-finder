@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="utf-8">
     <title>Spot Finder</title>
@@ -8,24 +7,29 @@
     <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
     <!-- <link rel="stylesheet" href="customStyleSheet.css"> -->
     <style type="text/css">
-      html, body { height: 100%; margin: 0; padding: 0; }
+      html, body { height: 100%; margin: 1%; padding: 1%; }
       #map { height: 42%; }
     </style>
   </head>
   <body>
+    <h1>SPOT FINDER</h1>
+    <h2>Find parking</h2>
     <!-- The Search Form -->
     <form id = 'query-form'>
-      <input type = 'text' id = 'search-query'></input>
-      <input type = 'submit'></input>
+      <input type = 'text' id = 'search-query'><br>
+      <label for='rank-sort'>Sort by ranking:</label>
+      <input type='checkbox' id='rank-sort'>
+      <label for='price-sort'>Sort by price:</label>
+      <input type='checkbox' id='price-sort'><br>
+      <input type = 'submit'>
     </form>
 
     <!-- Google Map -->
     <div id="map"></div>
-
     <!-- Search results -->
-    <div id = 'destinations'></div>
     <div id = 'details'></div>
     <div id = 'parking-spots'></div>
+    <div id = 'destinations'></div>
 
     <!-- Import JS files -->
     <script src = "lib/jquery-3.1.0.min.js"></script>
@@ -39,14 +43,14 @@
     <script src = "controllers/parkingSpotsController.js"></script>
     <script src = "controllers/mapsController.js"></script>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-ExUEzUVT9QOWcLBWJLbQ1ufnMC7g_PQ">
     </script>
 
     <!-- Handlebar Templates -->
     <script id="destinations-template" type="text/x-handlebars-template">
       {{#each this}}
     <div class="col-md-4">
-       <br>{{currentID}} {{name}}
+        <br>{{name}}
        <br>{{vicinity}}
        <br>price rating: {{price}}
        <br>rating: {{rating}}
@@ -55,17 +59,12 @@
       {{/each}}
     </script>
     <script id="details-template" type="text/x-handlebars-template">
-      <br>{{name}}
+        <br><a href={{website}} target="_blank">{{name}}</a>
       <br>{{vicinity}}
       <br>{{phoneNumber}}
-      <br>{{website}}
-      <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id-apples = {{id}}>Find Parking</a>
+        {{#if allowParkingLink}}
+        <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id-apples = {{id}}>Find Parking</a>
+        {{/if}}
     </script>
-    <!-- <script id="parking-spots-template" type="text/x-handlebars-template">
-      {{#each this}}
-      <br>{{name}}
-      <br>{{vicinity}}
-      {{/each}}
-    </script> -->
   </body>
 </html>
