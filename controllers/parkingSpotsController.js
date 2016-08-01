@@ -5,7 +5,7 @@ function addParkingSpots(element) {
 }
 
 function parkingSpotsAdapter(destination) {
-  var url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${destination.lat},${destination.lng}&radius=500&type=parking&key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE`
+  var url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${destination.lat},${destination.lng}&radius=500&type=parking&key=AIzaSyD-ExUEzUVT9QOWcLBWJLbQ1ufnMC7g_PQ`
   $.ajax({
     method: 'GET',
     url: url

@@ -4,7 +4,7 @@ function createDestinations() {
 }
 
 function destinationsAdapter(query) {
-  var url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=" + query + "&key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE"
+  var url = "https://maps.googleapis.com/maps/api/place/textsearch/xml?query=" + query + "&key=AIzaSyD-ExUEzUVT9QOWcLBWJLbQ1ufnMC7g_PQ"
   $.ajax({
     method: "GET",
     url: url
@@ -73,7 +73,7 @@ function findDestination(element) {
 function showDetails(destination) {
   store.currentDestination = destination
   // this way is really unorthodox
-  var url = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${destination.placeID}&key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE`
+  var url = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${destination.placeID}&key=AIzaSyD-ExUEzUVT9QOWcLBWJLbQ1ufnMC7g_PQ`
   $.ajax({
     method: 'GET',
     url: url
