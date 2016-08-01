@@ -2,26 +2,39 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Spot Finder</title>
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <!-- <link rel="stylesheet" href="customStyleSheet.css"> -->
     <style type="text/css">
-      html, body { height: 100%; margin: 0; padding: 0; }
+      html, body { height: 100%; margin: 1%; padding: 1%; }
       #map { height: 42%; }
     </style>
   </head>
   <body>
+    <h1>SPOT FINDER</h1>
+    <!-- The Search Form -->
     <form id = 'query-form'>
-      <input type = 'text' id = 'search-query'></input>
-      <input type = 'submit'></input>
+      <input type = 'text' id = 'search-query'><br>
+      <label for='rank-sort'>Sort by ranking:</label>
+      <input type='checkbox' id='rank-sort'>
+      <label for='price-sort'>Sort by price:</label>
+      <input type='checkbox' id='price-sort'><br>
+      <input type = 'submit'>
     </form>
+
+    <!-- Google Map -->
     <div id="map"></div>
-    <div id = 'destinations'>
-    </div>
-    <div id = 'details'>
-    </div>
-    <div id = 'parking-spots'>
-    </div>
-    <script src = "bin/jquery-3.1.0.min.js"></script>
-    <script src = "bin/handlebars-v4.0.5.js"></script>
+
+    <!-- Search results -->
+    <div id = 'details'></div>
+    <div id = 'parking-spots'></div>
+    <div id = 'destinations'></div>
+
+    <!-- Import JS files -->
+    <script src = "lib/jquery-3.1.0.min.js"></script>
+    <script src = "lib/handlebars-v4.0.5.js"></script>
+    <script src = "lib/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src = "app.js"></script>
     <script src = "store.js"></script>
     <script src = "models/destination.js"></script>
@@ -30,22 +43,25 @@
     <script src = "controllers/parkingSpotsController.js"></script>
     <script src = "controllers/mapsController.js"></script>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-ExUEzUVT9QOWcLBWJLbQ1ufnMC7g_PQ">
     </script>
+
+    <!-- Handlebar Templates -->
     <script id="destinations-template" type="text/x-handlebars-template">
       {{#each this}}
-      <br>{{currentID}} {{name}}
-      <br>{{vicinity}}
-      <br>price rating: {{price}}
-      <br>rating: {{rating}}
-      <br><a href = "#" onclick = "findDestination(this)" data-destination-id = {{id}}>Show Details</a>
+    <div class="col-md-4">
+       <br>{{name}}
+       <br>{{vicinity}}
+       <br>price rating: {{price}}
+       <br>rating: {{rating}}
+       <br><a href = "#" onclick = "findDestination(this)" data-destination-id = {{id}}>Show Details</a>
+    </div>
       {{/each}}
     </script>
     <script id="details-template" type="text/x-handlebars-template">
-      <br>{{name}}
+      <br><a href={{website}}>{{name}}</a>
       <br>{{vicinity}}
       <br>{{phoneNumber}}
-      <br>{{website}}
       {{#if allowParkingLink}}
       <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id-apples = {{id}}>Find Parking</a>
       {{/if}}
