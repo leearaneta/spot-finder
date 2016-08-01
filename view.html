@@ -27,9 +27,9 @@
     <div id="map"></div>
 
     <!-- Search results -->
-    <div id = 'destinations'></div>
     <div id = 'details'></div>
     <div id = 'parking-spots'></div>
+    <div id = 'destinations'></div>
 
     <!-- Import JS files -->
     <script src = "lib/jquery-3.1.0.min.js"></script>
@@ -49,20 +49,19 @@
     <!-- Handlebar Templates -->
     <script id="destinations-template" type="text/x-handlebars-template">
       {{#each this}}
-    <div class="col-md-4">
-       <br>{{currentID}} {{name}}
-       <br>{{vicinity}}
-       <br>price rating: {{price}}
-       <br>rating: {{rating}}
-       <br><a href = "#" onclick = "findDestination(this)" data-destination-id = {{id}}>Show Details</a>
-    </div>
+        <div class="col-md-4">
+           <br>{{name}}
+           <br>{{vicinity}}
+           <br>price rating: {{price}}
+           <br>rating: {{rating}}
+           <br><a href = "#" onclick = "findDestination(this)" data-destination-id = {{id}}>Show Details</a>
+        </div>
       {{/each}}
     </script>
     <script id="details-template" type="text/x-handlebars-template">
-      <br>{{name}}
+      <br><a href={{website}}>{{name}}</a>
       <br>{{vicinity}}
       <br>{{phoneNumber}}
-      <br>{{website}}
       {{#if allowParkingLink}}
       <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id-apples = {{id}}>Find Parking</a>
       {{/if}}
