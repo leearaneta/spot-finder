@@ -26,7 +26,7 @@ function destinationsAdapter(query) {
     var src = $("#destinations-template").html()
     var template = Handlebars.compile(src)
     var newHTML = template(destinations)
-    addMap(destinations)
+    createDestinationsMap(destinations)
     $("#destinations").empty().append(newHTML)
   })
 }
