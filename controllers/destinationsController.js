@@ -8,32 +8,63 @@ function destinationsAdapter(query) {
   $.ajax({
     method: "GET",
     url: url
-  }).done((turtle) => {
-    var object = xmlToJson(turtle)
-    var objects = object.PlaceSearchResponse.result
-    if (objects === undefined) {
-      alert("it's 1995")
-    } else if (objects.length === undefined) {
-      objects = [objects]
+  }).done((xml_results) => {
+    var json_results = xmlToJson(xml_results)
+    var results = json_results.PlaceSearchResponse.result
+    if (typeof results === "object") {
+      // If object has only one result, coerce into an
+      // array so that it can be mapped in the next step.
+      if (results.length === undefined) {
+        results = [results]
+      }
+      // Convert the results into a list of destination objects
+      var destinations = results.map((object) => {
+        var name = object.name ? object.name["#text"] : ""
+        var vicinity = object.formatted_address ? object.formatted_address["#text"] : ""
+        var price = object.price_level ? object.price_level["#text"] : ""
+        var rating = object.rating ? object.rating["text"] : ""
+        var placeID = object.place_id["#text"]
+        var lat = object.geometry.location.lat["#text"]
+        var lng = object.geometry.location.lng["#text"]
+        return new Destination(name, vicinity, price, rating, placeID, lat, lng)
+      })
+      console.log(destinations)
+      console.log(typeof destinations)
+
+      // Convert destinations to an array
+      // sorting code
+      var sortedByPrice = Array.from(destinations).sort((a, b) => {
+        if (a.price > b.price) {
+          return 1
+        } else if (a.price < b.price) {
+          return -1
+        } else {
+          return 0
+        }
+      })
+      var sortedByRating = Array.from(destinations).sort((a, b) => {
+        if (a.rating > b.rating) {
+          return 1
+        } else if (a.rating < b.rating) {
+          return -1
+        } else {
+          return 0
+        }
+      })
+
+      console.log(sortedByPrice);
+      console.log(sortedByRating);
+      // Handlebars template code
+      var src = $("#destinations-template").html()
+      var template = Handlebars.compile(src)
+      var newHTML = template(destinations)
+      // Render the results
+      $("#destinations").empty().append(newHTML)
+      // Render the map
+      createDestinationsMap(destinations)
+    }  else {
+      alert("Please enter a valid destination.")
     }
-    var destinations = objects.map((object) => {
-      var name = object.name ? object.name["#text"] : ""
-      var vicinity = object.formatted_address ? object.formatted_address["#text"] : ""
-      var price = object.price_level ? object.price_level["#text"] : ""
-      var rating = object.rating ? object.rating["text"] : ""
-      var placeID = object.place_id["#text"]
-      var lat = object.geometry.location.lat["#text"]
-      var lng = object.geometry.location.lng["#text"]
-      return new Destination(name, vicinity, price, rating, placeID, lat, lng)
-    })
-    debugger
-    var sortedByPrice = destinations.sort((a, b) => a.price - b.price)
-    var sortedByRating = destinations.sort((a, b) => a.rating - b.rating)
-    var src = $("#destinations-template").html()
-    var template = Handlebars.compile(src)
-    var newHTML = template(destinations)
-    $("#destinations").empty().append(newHTML)
-    createDestinationsMap(destinations)
   })
 }
 
@@ -47,6 +78,7 @@ function showDetails(element) {
     method: 'GET',
     url: url
   }).done((response) => {
+    console.log(response);
     var apple = response.result
     var destination = store.currentDestination
     destination.phoneNumber = apple.formatted_phone_number
