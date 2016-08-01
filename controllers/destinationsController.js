@@ -26,7 +26,6 @@ function destinationsAdapter(query) {
       var lng = object.geometry.location.lng["#text"]
       return new Destination(name, vicinity, price, rating, placeID, lat, lng)
     })
-    debugger
     var sortedByPrice = destinations.sort((a, b) => a.price - b.price)
     var sortedByRating = destinations.sort((a, b) => a.rating - b.rating)
     var src = $("#destinations-template").html()
@@ -37,9 +36,13 @@ function destinationsAdapter(query) {
   })
 }
 
-function showDetails(element) {
+function findDestination(element) {
   var destinationID = $(element).data("destination-id")
   var destination = store.destinations.find((destination) => destination.id === destinationID)
+  showDetails(destination)
+}
+
+function showDetails(destination) {
   store.currentDestination = destination
   // this way is really unorthodox
   var url = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${destination.placeID}&key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE`

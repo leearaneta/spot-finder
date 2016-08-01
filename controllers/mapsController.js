@@ -14,14 +14,18 @@ function createParkingSpotsMap(destination, parkingSpots) {
   createMapWithBounds(markers)
 }
 
-function createMarker(apple) {
-  var lat = parseFloat(apple.lat)
-  var lng = parseFloat(apple.lng)
-  return new google.maps.Marker({
+function createMarker(destination) {
+  var lat = parseFloat(destination.lat)
+  var lng = parseFloat(destination.lng)
+  var marker = new google.maps.Marker({
     position: {lat: lat, lng: lng},
-    title: apple.name,
+    title: destination.name,
     animation: google.maps.Animation.DROP
   })
+  marker.addListener('click', () => {
+    showDetails(destination)
+  })
+  return marker
 }
 
 function createMapWithBounds(markers) {
