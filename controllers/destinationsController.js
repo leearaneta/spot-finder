@@ -10,22 +10,23 @@ function destinationsAdapter(query) {
     url: url
   }).done((turtle) => {
     var object = xmlToJson(turtle)
-    var destinations = object.PlaceSearchResponse.result
-    var hi = destinations.map((destination) => {
-      var name = destination.name["#text"]
-      var vicinity = destination.formatted_address["#text"]
-      var price = destination.price_level["#text"]
-      var rating = destination.rating["#text"]
-      var placeID = destination.place_id["#text"]
-      var lat = destination.geometry.location.lat["#text"]
-      var lng = destination.geometry.location.lng["#text"]
+    var objects = object.PlaceSearchResponse.result
+    var destinations = objects.map((object) => {
+      var name = object.name["#text"]
+      var vicinity = object.formatted_address["#text"]
+      var price = object.price_level["#text"]
+      var rating = object.rating["#text"]
+      var placeID = object.place_id["#text"]
+      var lat = object.geometry.location.lat["#text"]
+      var lng = object.geometry.location.lng["#text"]
       return new Destination(name, vicinity, price, rating, placeID, lat, lng)
     })
-    var sortedByPrice = hi.sort((a, b) => a.price - b.price)
-    var sortedByRating = hi.sort((a, b) => a.rating - b.rating)
+    var sortedByPrice = destinations.sort((a, b) => a.price - b.price)
+    var sortedByRating = destinations.sort((a, b) => a.rating - b.rating)
     var src = $("#destinations-template").html()
     var template = Handlebars.compile(src)
-    var newHTML = template(hi)
+    var newHTML = template(destinations)
+    addMap(destinations)
     $("#destinations").empty().append(newHTML)
   })
 }

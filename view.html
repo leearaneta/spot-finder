@@ -3,12 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 42%; }
+    </style>
   </head>
   <body>
     <form id = 'query-form'>
       <input type = 'text' id = 'search-query'></input>
       <input type = 'submit'></input>
     </form>
+    <div id="map"></div>
     <div id = 'destinations'>
     </div>
     <div id = 'details'>
@@ -23,6 +28,10 @@
     <script src = "controllers/destinationsController.js"></script>
     <script src = "models/parkingSpot.js"></script>
     <script src = "controllers/parkingSpotsController.js"></script>
+    <script src = "controllers/mapsController.js"></script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE">
+    </script>
     <script id="destinations-template" type="text/x-handlebars-template">
       {{#each this}}
       <br>{{name}}
