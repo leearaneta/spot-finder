@@ -62,13 +62,9 @@
       <br><a href={{website}}>{{name}}</a>
       <br>{{vicinity}}
       <br>{{phoneNumber}}
+      {{#if allowParkingLink}}
       <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id-apples = {{id}}>Find Parking</a>
+      {{/if}}
     </script>
-    <!-- <script id="parking-spots-template" type="text/x-handlebars-template">
-      {{#each this}}
-      <br>{{name}}
-      <br>{{vicinity}}
-      {{/each}}
-    </script> -->
   </body>
 </html>

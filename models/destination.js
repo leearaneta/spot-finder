@@ -13,6 +13,7 @@ const destinationCreator = (() => {
       this.parkingSpots = []
       this.phoneNumber = undefined
       this.website = undefined
+      this.allowParkingLink = true
       store.destinations.push(this)
     }
   }
