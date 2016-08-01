@@ -52,6 +52,12 @@ function xmlToJson(xml) {
 	return obj;
 };
 
+function render(id, object) {
+  var src = $(`#${id}-template`).html()
+  var template = Handlebars.compile(src)
+  var newHTML = template(object)
+  $(`#${id}`).empty().append(newHTML)
+}
 
 $(document).ready(() => {
   queryListener()

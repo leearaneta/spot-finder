@@ -60,11 +60,7 @@ function destinationsAdapter(query, sortByRating, sortByPrice) {
       }
 
       // Handlebars template code
-      var src = $("#destinations-template").html()
-      var template = Handlebars.compile(src)
-      var newHTML = template(destinations)
-      // Render the results
-      $("#destinations").empty().append(newHTML)
+      render("destinations", destinations)
       // Render the map
       createDestinationsMap(destinations)
     }  else {
@@ -92,9 +88,6 @@ function showDetails(destination) {
     var destination = store.currentDestination
     destination.phoneNumber = result.formatted_phone_number
     destination.website = result.website
-    var src = $("#details-template").html()
-    var template = Handlebars.compile(src)
-    var newHTML = template(destination)
-    $("#details").empty().append(newHTML)
+    render('details', destination)
   })
 }
