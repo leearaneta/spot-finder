@@ -68,9 +68,13 @@ function destinationsAdapter(query) {
   })
 }
 
-function showDetails(element) {
+function findDestination(element) {
   var destinationID = $(element).data("destination-id")
   var destination = store.destinations.find((destination) => destination.id === destinationID)
+  showDetails(destination)
+}
+
+function showDetails(destination) {
   store.currentDestination = destination
   // this way is really unorthodox
   var url = `https://maps.googleapis.com/maps/api/place/details/json?placeid=${destination.placeID}&key=AIzaSyCfIm9SvYS95hI47ulG5GEMmWKtl9JenlE`
