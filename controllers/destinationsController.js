@@ -1,7 +1,7 @@
 function createDestinations() {
-  var query = $("#search-query").val()
-  sortByRating = $('rate-sort').is(':checked')
-  sortByPrice = $('price-sort').is(':checked')
+  var query = $("#search-query").val();
+  var sortByRating = $('#rate-sort').is(':checked');
+  var sortByPrice = $('#price-sort').is(':checked');
   $('#details').empty();
   $('#directions-header').empty();
   $('#directions').empty();
@@ -45,6 +45,7 @@ function destinationsAdapter(query, sortByRating, sortByPrice) {
             return 0
           }
         })
+        console.log(destinations)
       }
       // Sorting by price
       if (sortByPrice) {
@@ -57,6 +58,7 @@ function destinationsAdapter(query, sortByRating, sortByPrice) {
             return 0
           }
         })
+        console.log(destinations)
       }
 
       // Handlebars template code
