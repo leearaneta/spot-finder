@@ -7,7 +7,9 @@ const directionsCreator = (() => {
         startAddress: startAddress,
         endAddress: endAddress,
         distance: distance,
-        duration: duration}
+        duration: duration
+      }
+      store.directions.push(this)
     }
   }
 })()
