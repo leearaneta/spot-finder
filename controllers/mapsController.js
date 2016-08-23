@@ -35,10 +35,10 @@ function createMapWithBounds(markers) {
   markers.forEach((marker) => marker.setMap(map))
 }
 
-function createBounds(oranges) {
+function createBounds(destinations) {
   var bounds = new google.maps.LatLngBounds();
-  for (var i = 0; i < oranges.length; i++) {
-    bounds.extend(oranges[i].getPosition());
+  for (var i = 0; i < destinations.length; i++) {
+    bounds.extend(destinations[i].getPosition());
   }
   return bounds
 }
