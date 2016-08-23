@@ -78,7 +78,7 @@
       <br>{{vicinity}}
       <br>{{phoneNumber}}
       {{#if allowParkingLink}}
-      <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id = {{id}}>Find Parking</a>
+      <br><a href = "#" onclick = "addParkingSpots(this)" data-destination-id-parking = {{id}}>Find Parking</a>
       {{else}}
       <br><a href = "#" onclick = "addDirections(this)" data-parking-spot= "{{placeID}}" data-destination = "{{destination.placeID}}">Get Walking Directions</a>
       {{/if}}
