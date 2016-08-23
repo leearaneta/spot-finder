@@ -1,5 +1,5 @@
 function addParkingSpots(element) {
-  var destinationID = $(element).data("destination-id-apples")
+  var destinationID = $(element).data("destination-id")
   var destination = store.destinations.find((destination) => destination.id === destinationID)
   parkingSpotsAdapter(destination)
 }
